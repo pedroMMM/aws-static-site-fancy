@@ -20,6 +20,8 @@ provider "aws" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 variable "hosted_zone_name" {
   type        = string
   description = "Route53 Hosted Zone to create"

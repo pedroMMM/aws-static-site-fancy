@@ -22,7 +22,7 @@ Write a Terraform module for generating the infrastructure needed for hosting a 
 
 ## Local Development
 
-AWS resources for Terraform Module local development are under the `local` directory,
+AWS resources for Terraform Module local development are under the `local` directory.
 
 1. Copy `pedro.tfvars` file naming it after the user.
 1. Modify the new file to create a new subdomain on a domain you control.
@@ -32,3 +32,10 @@ AWS resources for Terraform Module local development are under the `local` direc
     1. Apply Terraform changes via `terraform apply tfplan`
 1. Add a NS records on the domain your control for the new Route53 Hosted Zone. The NS record should have the same name as your Hosted Zone. Use the Terraform output for the answers, depending on the DNS host it can a single or multiple answers.
 
+## Deployment
+
+The Terraform module is been used by 2 environments, `dev` and `prd`. We can only upload new static site content by creating a new version and host it on the `dev` environment. Once happy with the current `dev` version it must then be promoted to `prd`.
+
+1. Create a new static site version with `./do.sh version-up <version>`.
+1. Test and accept the version in the `dev` environment.
+1. Promote the static site artifact from `dev` to `prd` with `./do.sh promote`.
